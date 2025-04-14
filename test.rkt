@@ -3,4 +3,7 @@
 (require "./main.rkt")
 (require output)
 
-(dump (add2 11 22))
+;;(define %%api-id (load-api "PROGRAM.native.dll"))
+;;(dump %%api-id)
+;;(define %%result (call-api %%api-id "add2" (list 11 22)))
+;;(dump %%result)

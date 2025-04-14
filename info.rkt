@@ -13,6 +13,7 @@
 (define deps '("compatibility-lib"
                "base"
                "output"
+               "meta-json"
                ))
 (define build-deps '("racket-doc"
                      "scribble-lib"))
