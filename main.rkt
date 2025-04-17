@@ -20,7 +20,11 @@
         (error result)
         (list-ref result 0))))
 
+(define (call-api* api-id name . args)
+  (call-api api-id name args))
+
 (provide json_api_load_utf8
          json_api_call_utf8
          load-api
-         call-api)
+         call-api
+         call-api*)
