@@ -4,6 +4,9 @@
          ffi/unsafe/define)
 (require meta-json)
 
+(define (bitness-of-pointer)
+  (system-type 'word))
+
 (define-ffi-definer define-json-api (ffi-lib "json-api-v1.dll"))
 (define-json-api json_api_load_utf8 (_fun _string -> _int))
 (define-json-api json_api_call_utf8 (_fun _int _string _string -> _string))
@@ -14,17 +17,19 @@
         (error "Could not load:" dll-name)
         api-id)))
 
-(define (call-api api-id name args)
+(define (call-api$ api-id name args)
   (let ([result (from-json (json_api_call_utf8 api-id name (to-json args)))])
     (if (string? result)
         (error result)
         (list-ref result 0))))
 
-(define (call-api* api-id name . args)
-  (call-api api-id name args))
+(define (call-api api-id name . args)
+  (call-api$ api-id name args))
 
-(provide json_api_load_utf8
+(provide bitness-of-pointer
+         json_api_load_utf8
          json_api_call_utf8
          load-api
-         call-api
-         call-api*)
+         call-api$
+         call-api)
+
